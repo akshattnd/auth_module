@@ -8,6 +8,8 @@ from app.module.auth.auth_schema import (
     LoginRequest,
     TokenResponse
 )
+from app.module.auth.auth_dependencies import get_current_user
+from app.module.auth.user_model import User
 router = APIRouter(prefix="/auth", tags=["Auth"])
 
 @router.post("/register", response_model=ApiResponse[UserResponse], status_code=201)
@@ -29,3 +31,10 @@ def login(data:LoginRequest, db:Session = Depends(get_db)):
         message="user Login successfully",
         data=data,   
         )
+@router.get("/me",status_code=200,response_model=ApiResponse[UserResponse])
+def get_profile(current_user:User = Depends(get_current_user)):
+    return ApiResponse(
+        success=True,
+        message='user profile fetched',
+        data=current_user
+    )

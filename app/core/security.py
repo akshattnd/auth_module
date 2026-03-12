@@ -1,10 +1,10 @@
 from passlib.context import CryptContext
 from jose import jwt, JWTError
 from datetime import datetime, timedelta, UTC
-from fastapi.security import OAuth2PasswordBearer
+from fastapi.security import HTTPBearer
 SECRET_KEY = "supersecret"
 ALGORITHM = "HS256"
-oauth2_scheme = OAuth2PasswordBearer(tokenUrl="/auth/login")
+security = HTTPBearer()
 pwd_context = CryptContext(schemes=["bcrypt"], deprecated="auto")
 
 def hash_password(password:str)-> str:

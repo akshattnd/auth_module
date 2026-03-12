@@ -13,4 +13,4 @@ class UserResponse(BaseModel):
     updated_at:datetime | None
 
     class Config:
-            from_attributes = True
+        from_attributes = True

@@ -5,8 +5,7 @@ from app.core.security import (
     create_access_token,
 ) 
 
-from . import user_repository
-
+from app.module.auth import user_repository
 from app.module.auth.user_model import User
 
 def register_user(db:Session, email:str, password:str):
@@ -16,7 +15,7 @@ def register_user(db:Session, email:str, password:str):
     password_hash = hash_password(password)
     user = user_repository.create_user(db, email, password_hash)
     return user
-    
+
 def login_user(db:Session, email:str, password:str):
     user = user_repository.get_user_by_email(db,email)
     
