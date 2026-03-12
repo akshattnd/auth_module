@@ -22,18 +22,10 @@ def register(user:UserCreate, db:Session = Depends(get_db)):
 
 @router.post("/login",status_code=200,response_model=ApiResponse[TokenResponse])
 def login(data:LoginRequest, db:Session = Depends(get_db)):
-    try:
-        token = auth_service.login_user(db,data.email,data.password)
-        data =  TokenResponse(access_token=token)
-        return ApiResponse(
-            success=True,
-            message="user Login successfully",
-            data=data,   
-            )
-    except Exception as e:
-        return ApiResponse(
-            success=False,
-            message="Error registering user",
-            data=None,
-            error=str(e)
+    token = auth_service.login_user(db,data.email,data.password)
+    data =  TokenResponse(access_token=token)
+    return ApiResponse(
+        success=True,
+        message="user Login successfully",
+        data=data,   
         )

@@ -22,7 +22,8 @@ def login_user(db:Session, email:str, password:str):
     
     if not user:
         raise Exception("Invalid credentials")
-    if not verify_password(user.password, password):
+    
+    if not verify_password(password=password, hashed=user.password):
         raise Exception("Invalid credentails")
     token = create_access_token({"sub":str(user.id)})
     return token
