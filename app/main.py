@@ -11,8 +11,8 @@ app = FastAPI(
     description="Authentication service"
 )
 @app.get("/",status_code=200)
-def index():
-    return ApiResponse(success=True,message="Hello World!")
+def health_check():
+    return ApiResponse(success=True,message="Ok")
 
 app.include_router(auth_router)
 
