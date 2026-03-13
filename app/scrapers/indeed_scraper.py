@@ -34,5 +34,6 @@ class IndeedScraper(BaseScraper):
         return {
             "title": title,
             "company": company,
-            "location": location
+            "location": location,
+            "link": link
         }
