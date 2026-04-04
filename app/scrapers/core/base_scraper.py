@@ -7,9 +7,10 @@ class BaseScraper:
         if not self.page:
             self.page = await self.browser_manager.new_page()            
     async def open(self, url):
-        await self.page = self.init_page()
+        await self.init_page()
         await self.page.goto(url)
 
-    def close(self):
+    async def close(self):
         if self.page:
-            self.page.close()
+            await self.page.close()
+            self.page = None
